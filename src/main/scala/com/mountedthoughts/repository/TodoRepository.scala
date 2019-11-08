@@ -1,12 +1,8 @@
 
 package com.mountedthoughts.repository
 import com.mountedthoughts.model.{User, Todo}
+import slick.jdbc.H2Profile.api.Database
 
-//TODO: can we make this a parametrized trait? 
-trait TodoRepository {
-  def (user: User) findAll(): List[Todo]
-}
 
-given todoImpl: TodoRepository {
-  override def (user: User) findAll(): List[Todo] = ???
-}
+trait TodoRepository(val db: Database)
+  def findAll(user: User): List[Todo]
